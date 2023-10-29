@@ -31,6 +31,7 @@ if(TRITON_FIL_DOCKER_BUILD)
     OUTPUT fil/libtriton_fil.so $<$<BOOL:${TRITON_ENABLE_GPU}>:fil/libcuml++.so>
     COMMAND DOCKER_BUILDKIT=1 docker build -t
       triton_fil_builder
+      --network=host --build-arg http_proxy=http://127.0.0.1:10809 --build-arg https_proxy=http://127.0.0.1:10809 
       --build-arg BUILD_TYPE=${CMAKE_BUILD_TYPE}
       --build-arg TRITON_VERSION=${TRITON_BUILD_CONTAINER_VERSION}
       --build-arg BASE_IMAGE=${TRITON_BUILD_CONTAINER}
